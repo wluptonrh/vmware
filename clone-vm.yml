@@ -6,9 +6,9 @@
    # - community.general.splunk
 
    #Define the below vars within exta_vars inside your job template 
-   #vars:
+   vars:
       #target_vm_name: test
-      #source_vm_name: test
+      source_vm_name: rhcos-4.11.9
       #target_cluster: Cluster-1
       #target_datastore:
       #target_folder:
