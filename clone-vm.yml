@@ -1,0 +1,98 @@
+ - name: Test provisioning on VmWare
+   hosts: localhost
+   connection: local
+   gather_facts: true
+   #collections:
+   # - community.general.splunk
+
+   #Define the below vars within exta_vars inside your job template 
+   #vars:
+      #target_vm_name: test
+      #source_vm_name: test
+      #target_cluster: Cluster-1
+      #target_datastore:
+      #target_folder:
+      #target_resource_pool:
+
+   tasks:
+    - name: Get source vm info
+      vmware.vmware_rest.vcenter_vm_info:
+        filter_names:
+          - "{{ source_vm_name }}"
+      register: vm_info
+
+
+    - name: Print vm info
+      ansible.builtin.debug:
+        msg: "{{ vm_info }}"
+
+
+    - name: Get cluster info
+      vmware.vmware_rest.vcenter_cluster_info:
+        filter_names:
+          -  "{{ target_cluster }}"
+      register: cluster_info
+
+      
+    - name: Print cluster info
+      ansible.builtin.debug:
+        msg: "{{ cluster_info }}"
+
+
+    - name: Get resource pool info
+      vmware.vmware_rest.vcenter_resourcepool_info:
+        filter_names: 
+          - "{{ target_resource_pool }}"
+      register: resource_pool_info
+
+
+    - name: Print resource pool info
+      ansible.builtin.debug:
+        msg: "{{ resource_pool_info }}"
+
+
+    - name: Get datastore info
+      vmware.vmware_rest.vcenter_datastore_info:
+         filter_names:
+           - "{{ target_datastore }}"
+      register: datastore_info
+
+
+    - name: Print datastore info
+      ansible.builtin.debug:
+        msg: "{{ datastore_info }}"
+
+
+    - name: Get folder info
+      vmware.vmware_rest.vcenter_folder_info:
+         filter_names:
+           - "{{ target_folder }}"
+      register: folder_info
+
+  
+    - name: Print folder info
+      ansible.builtin.debug:
+        msg: "{{ folder_info }}"
+
+    - set_fact:
+        source_vm_id: "{{ vm_info.value[0].vm }}"
+        cluster_id: '{{ cluster_info.value[0].cluster }}'
+        datastore_id: '{{ datastore_info.value[0].datastore }}'
+        folder_id: '{{ folder_info.value[0].folder }}'
+        resource_pool_id: '{{ resource_pool_info.value[0].resource_pool }}'
+        # network_id: '{{ network_info.value[0].network }}'
+
+
+    - name: Create an instant clone of a VM
+      vmware.vmware_rest.vcenter_vm:
+        placement:
+          cluster: "{{ cluster_id }}"
+          datastore: "{{ datastore_id }}"
+          folder: "{{ folder_id  }}"
+          resource_pool: '{{ resource_pool_id }}'
+        source: "{{ source_vm_id  }}" # "{{ vm_details.template }}"
+        name: my_test_vm #"{{ vm_details.name }}"
+        state: 'clone'
+        guest_OS: RHEL_8_64 #"{{ vm_details.vm_os_family }}"
+        power_on: false
+      register: my_instant_clone
