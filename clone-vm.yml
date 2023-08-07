@@ -17,8 +17,8 @@
    tasks:
     - name: Get source vm info
       vmware.vmware_rest.vcenter_vm_info:
-        filter_names:
-          - "{{ source_vm_name }}"
+     #   filter_names:
+      #    - "{{ source_vm_name }}"
       register: vm_info
 
 
