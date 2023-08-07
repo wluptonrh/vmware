@@ -75,7 +75,7 @@
         msg: "{{ folder_info }}"
 
     - set_fact:
-        source_vm_id: "{{ vm_info.value.vm }}"
+        source_vm_id: "{{ vm_info.vm }}"
         cluster_id: '{{ cluster_info.value[0].cluster }}'
         datastore_id: '{{ datastore_info.value[0].datastore }}'
         folder_id: '{{ folder_info.value[0].folder }}'
