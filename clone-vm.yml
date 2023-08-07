@@ -17,8 +17,8 @@
    tasks:
     - name: Get source vm info
       vmware.vmware_rest.vcenter_vm_info:
-     #   filter_names:
-      #    - "{{ source_vm_name }}"
+        filter_names:
+         - "{{ source_vm_name }}"
       register: vm_info
 
 
@@ -75,7 +75,7 @@
         msg: "{{ folder_info }}"
 
     - set_fact:
-        source_vm_id: "{{ vm_info.value.vm }}"
+        source_vm_id: "{{ vm_info.value[0].vm }}"
         cluster_id: '{{ cluster_info.value[0].cluster }}'
         datastore_id: '{{ datastore_info.value[0].datastore }}'
         folder_id: '{{ folder_info.value[0].folder }}'
