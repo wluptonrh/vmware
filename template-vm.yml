@@ -1,0 +1,34 @@
+ - name: Test provisioning from an existimg template on VmWare
+   hosts: localhost
+   connection: local
+   gather_facts: true
+
+   #vars:
+       #target_cluster: 
+       #target_folder:
+       #target_resouce_pool:
+
+   tasks:
+     - name: Gather library items
+       vmware.vmware_rest.vcenter_vmtemplate_libraryitems_info:
+          #template_library_item: 
+       register: library_info
+
+     - name: Print library items
+       debug:
+         msg: "{{ library_info }}"
+
+   
+     - name: Deploy a new VM based on an existing template
+       vmware.vmware_rest.vcenter_vmtemplate_libraryitems:
+          name: vm-from-template
+          library: '{{ nfs_lib.id }}'
+          template_library_item: '{{ my_template_item.id }}'
+          placement:
+             cluster: "{{ lookup('vmware.vmware_rest.cluster_moid', '/my_dc/host/my_cluster') }}"
+             folder: "{{ lookup('vmware.vmware_rest.folder_moid', '/my_dc/vm') }}"
+             resource_pool: "{{ lookup('vmware.vmware_rest.resource_pool_moid', '/my_dc/host/my_cluster/Resources') }}"
+          state: present
+       register: my_new_vm
+
+   
