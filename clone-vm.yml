@@ -24,7 +24,7 @@
 
     - name: Print vm info
       ansible.builtin.debug:
-        msg: "{{ vm_info.value }}"
+        msg: "{{ vm_info.value.vm }}"
 
 
     - name: Get cluster info
