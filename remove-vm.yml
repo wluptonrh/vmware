@@ -1,5 +1,0 @@
- - name: Test provisioning on VmWare
-   hosts: localhost
-   connection: local
-   gather_facts: true
-   vars:
