@@ -41,8 +41,8 @@
 
     - name: Get resource pool info
       vmware.vmware_rest.vcenter_resourcepool_info:
-        filter_names: 
-          - "{{ target_resource_pool }}"
+     #   filter_names: 
+      #    - "{{ target_resource_pool }}"
       register: resource_pool_info
 
 
