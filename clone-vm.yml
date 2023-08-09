@@ -10,8 +10,8 @@
       target_vm_name: test
       source_vm_name: rhcos-4.11.9
       target_cluster: Cluster-1
-      #target_datastore:
       target_folder: Workloads
+      #target_datastore:
       #target_resource_pool:
 
    tasks:
@@ -63,7 +63,7 @@
         msg: "{{ datastore_info }}"
 
     - debug:
-        msg: "{{ source_vm_name }}"
+        msg: "{{ target_cluster }}"
         
     - debug:
         msg: "{{ target_folder }}"
