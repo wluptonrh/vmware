@@ -53,7 +53,7 @@
 
     - name: Get datastore info
       vmware.vmware_rest.vcenter_datastore_info:
-         filter_names:
+        filter_names:
            - "{{ target_datastore }}"
       register: datastore_info
 
@@ -62,16 +62,10 @@
       ansible.builtin.debug:
         msg: "{{ datastore_info }}"
 
-    - debug:
-        msg: "{{ target_cluster }}"
-        
-    - debug:
-        msg: "{{ target_folder }}"
-
     - name: Get folder info
       vmware.vmware_rest.vcenter_folder_info:
         filter_names:
-           - Workloads
+           - "{{ target_folder }}"
       register: folder_info
 
   
