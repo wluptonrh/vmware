@@ -19,15 +19,15 @@
          msg: "{{ library_info }}"
 
 
-    - name: Get folder info
-      vmware.vmware_rest.vcenter_folder_info:
-        filter_names:
-           - "{{ target_folder }}"
-      register: folder_info
+     - name: Get folder info
+       vmware.vmware_rest.vcenter_folder_info:
+         filter_names:
+            - "{{ target_folder }}"
+       register: folder_info
 
-    - name: Print folder info
-      ansible.builtin.debug:
-        msg: "{{ folder_info }}"
+     - name: Print folder info
+       ansible.builtin.debug:
+         msg: "{{ folder_info }}"
 
    
      - name: Deploy a new VM based on an existing template
