@@ -7,11 +7,11 @@
 
    #Define the below vars within exta_vars inside your job template 
    vars:
-      #target_vm_name: test
+      target_vm_name: test
       source_vm_name: rhcos-4.11.9
-      #target_cluster: Cluster-1
+      target_cluster: Cluster-1
       #target_datastore:
-      #target_folder:
+      target_folder: Workloads
       #target_resource_pool:
 
    tasks:
@@ -24,7 +24,7 @@
 
     - name: Print vm info
       ansible.builtin.debug:
-        msg: "{{ vm_info.value[0].vm }}"
+        msg: "{{ vm_info }}"
 
 
     - name: Get cluster info
@@ -65,8 +65,8 @@
 
     - name: Get folder info
       vmware.vmware_rest.vcenter_folder_info:
-#         filter_names:
-#           - "{{ target_folder }}"
+        filter_names:
+           - "{{ target_folder }}"
       register: folder_info
 
   
