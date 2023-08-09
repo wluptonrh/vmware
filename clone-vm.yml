@@ -65,8 +65,8 @@
 
     - name: Get folder info
       vmware.vmware_rest.vcenter_folder_info:
-         filter_names:
-           - "{{ target_folder }}"
+#         filter_names:
+#           - "{{ target_folder }}"
       register: folder_info
 
   
@@ -75,7 +75,7 @@
         msg: "{{ folder_info }}"
 
     - set_fact:
-        source_vm_id: "{{ vm_info.value }}"
+        source_vm_id: "{{ vm_info.value[0].vm }}"
         cluster_id: '{{ cluster_info.value[0].cluster }}'
         datastore_id: '{{ datastore_info.value[0].datastore }}'
         folder_id: '{{ folder_info.value[0].folder }}'
