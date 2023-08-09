@@ -62,6 +62,8 @@
       ansible.builtin.debug:
         msg: "{{ datastore_info }}"
 
+    - debug:
+        msg: "{{ target_folder }}"
 
     - name: Get folder info
       vmware.vmware_rest.vcenter_folder_info:
