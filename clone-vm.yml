@@ -63,6 +63,9 @@
         msg: "{{ datastore_info }}"
 
     - debug:
+        msg: "{{ source_vm_name }}"
+        
+    - debug:
         msg: "{{ target_folder }}"
 
     - name: Get folder info
