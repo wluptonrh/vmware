@@ -11,7 +11,7 @@
       source_vm_name: rhcos-4.11.9
       target_cluster: Cluster-1
       #target_datastore:
-      target_folder: Workloads
+      target_folder: "Workloads"
       #target_resource_pool:
 
    tasks:
