@@ -17,6 +17,7 @@
           password: "{{ controller_password }}"
           force_basic_auth: yes
           validate_certs: false
+          body_format: json
        register: stage_inventory_info
 
      - name: Print host info from stage inventory
