@@ -36,7 +36,7 @@
 
      - name: Print age
        debug:
-         msg: "{{ item }}" #| to_datetime).total_seconds() }}"
+         msg: "{{ item | get_type }}" #| to_datetime).total_seconds() }}"
        with_items: filtered_data
 
 
