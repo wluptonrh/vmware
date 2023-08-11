@@ -20,6 +20,10 @@
           body_format: json
        register: stage_inventory_info
 
+     - name: Save json data
+       set_fact:
+          jsondata: stage_inventory_info.results
+
      - name: Print each host and the date they were added to the inventory
        debug:
           msg: "{{ stage_inventory_info.json.results | json_query(jmesquery) | to_json }}"
@@ -36,8 +40,8 @@
 
      - name: Print age
        debug:
-         msg: "{{ item | type_debug }}" #| to_datetime).total_seconds() }}"
-       with_items: filtered_data
+         msg: "{{ item }}" #| to_datetime).total_seconds() }}"
+       with_items: jsondata
 
 
 
