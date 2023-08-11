@@ -41,7 +41,7 @@
      - name: Print age
        debug:
          msg: "{{ item }}" #| to_datetime).total_seconds() }}"
-       with_items: jsondata
+       with_items: "{{ jsondata }}"
 
 
 
