@@ -36,7 +36,7 @@
 
      - name: Print age
        debug:
-         msg: "{{ (item.created | to_datetime).total_seconds() }}"
+         msg: "{{ item.created }}" #| to_datetime).total_seconds() }}"
        with_items: stage_inventory_info.json.results
 
 
