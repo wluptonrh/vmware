@@ -26,5 +26,9 @@
        vars:
           jmesquery: "[*].{Name: name, Created: created}"
 
+     - name: Show jmesquery
+       debug:
+          msg: "{{ jmesquery }}"
+
 
        
