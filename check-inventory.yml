@@ -22,7 +22,7 @@
 
      - name: Print each host and the date they were added to the inventory
        debug:
-          msg: "{{ stage_inventory_info.json.results | json_query(jmesquery) }}"
+          msg: "{{ stage_inventory_info.json.results | json_query(jmesquery) | to_json }}"
        vars:
           jmesquery: "[*].{Name: name, Created: created}"
        register: filtered_data
