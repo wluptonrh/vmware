@@ -25,6 +25,7 @@
           msg: "{{ stage_inventory_info.json.results | json_query(jmesquery) }}"
        vars:
           jmesquery: "[*].{Name: name, Created: created}"
+       register: jmesquery
 
      - name: Show jmesquery
        debug:
