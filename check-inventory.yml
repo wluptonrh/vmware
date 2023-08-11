@@ -34,9 +34,9 @@
        with_items: stage_inventory_info.json.results
        register: age
 
-    - name: print age
-      debug: 
-         msg: "{{ age }}"
+     - name: print age
+       debug: 
+          msg: "{{ age }}"
 
 
        
