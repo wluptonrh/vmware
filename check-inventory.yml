@@ -27,9 +27,16 @@
           jmesquery: "[*].{Name: name, Created: created}"
        register: jmesquery
 
-     - name: Show jmesquery
-       debug:
-          msg: "{{ jmesquery }}"
+     - name: Determine age of each vm
+       set_fact:
+          secsdiff: '{{ ( (item.created | to_datetime) - (ansible_date_time.iso8601 | to_datetime) ).total_seconds() }}'
+         # host_data: {{ item.created | combine({ "age": "blah" }) }}"
+       with_items: stage_inventory_info.json.results
+       register: age
+
+    - name: print age
+      debug: 
+         msg: "{{ age }}"
 
 
        
