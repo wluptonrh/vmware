@@ -22,9 +22,9 @@
 
      - name: Print each host and the date they were added to the inventory
        debug:
-          msg: "{{ stage_inventory_info.json | json_query(jmesquery) }}"
-       vars:
-          jmesquery: "[*].{Name: name, Created: created}"
+          msg: "{{ stage_inventory_info.json }}" #| json_query(jmesquery) }}"
+     #  vars:
+     #     jmesquery: "[*].{Name: name, Created: created}"
 
 
        
