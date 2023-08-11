@@ -20,7 +20,7 @@
           body_format: json
        register: stage_inventory_info
 
-     - name: Print host info from stage inventory
+     - name: Print each host and the date they were added to the inventory
        debug:
           msg: "{{ stage_inventory_info.json }}"
 
