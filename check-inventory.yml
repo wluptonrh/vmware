@@ -13,6 +13,8 @@
        uri:
           url: https://student1.7phbk.example.opentlc.com/api/v2/inventories/2/hosts/
           method: GET
+          user: "{{ controller_username }}"
+          password: "{{ controller_password }}"
        register: stage_inventory_info
 
      - name: Print host info from stage inventory
