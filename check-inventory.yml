@@ -25,7 +25,7 @@
           msg: "{{ stage_inventory_info.json.results | json_query(jmesquery) }}"
        vars:
           jmesquery: "[*].{Name: name, Created: created}"
-       register: jmesquery
+       register: filtered_data
 
      # - name: Determine age of each vm
      #   set_fact:
@@ -36,8 +36,8 @@
 
      - name: Print age
        debug:
-         msg: "{{ item }}" #| to_datetime).total_seconds() }}"
-       with_items: jmesquery
+         msg: "{{ filtered_data }}" #| to_datetime).total_seconds() }}"
+
 
 
        
