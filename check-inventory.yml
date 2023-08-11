@@ -1,0 +1,23 @@
+---
+ - name: Check host age with VMware inventory source
+   become: false
+   hosts: localhost
+   gather_facts: false
+
+   vars:
+      stage_inventory:
+      staged_host:
+
+   tasks:
+     - name: Gather host info from stage inventory
+       uri:
+          url: https://student1.7phbk.example.opentlc.com/api/v2/inventories/2/hosts/
+          method: GET
+       register: stage_inventory_info
+
+     - name: Print host info from stage inventory
+       debug:
+          msg: "{{ stage_inventory_info.json }}"
+
+
+       
