@@ -1,3 +1,4 @@
+
 ---
  - name: Check host age with VMware inventory source
    become: false
@@ -19,6 +20,9 @@
           validate_certs: false
           body_format: json
        register: stage_inventory_info
+
+     - debug:
+          msg: "{{ stage_inventory_info }}"
 
      - name: Save json data
        set_fact:
