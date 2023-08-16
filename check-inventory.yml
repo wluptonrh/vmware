@@ -11,7 +11,7 @@
    tasks:
      - name: Gather host info from stage inventory
        uri:
-          url: https://student1.7phbk.example.opentlc.com/api/v2/inventories/2/hosts/
+          url: "{{ api_endpoint }}"
           method: GET
           user: "{{ controller_username }}"
           password: "{{ controller_password }}"
