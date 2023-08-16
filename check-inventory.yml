@@ -33,7 +33,7 @@
             Host ID: {{ item.id }}
             Name: {{ item.name }} 
             Created: {{ item.created }}
-            Age: {{ (ansible_date_time.epoch | float - item.created | regex_replace('\\..*', '') | float) | int }}
+            Age: {{ ((ansible_date_time.epoch | float - item.created | regex_replace('\\..*', '') | float) / 86400) | int }}
             ------------------------------------------
        loop: "{{ stage_inventory_info.json.results }}"
 
