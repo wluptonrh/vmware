@@ -24,6 +24,9 @@
        set_fact:
           jsondata: "{{ stage_inventory_info.json.results }}"
 
+     - name: print facts
+       setup:
+
      - name: Print each host and the date they were added to the inventory
        debug:
           msg: "{{ stage_inventory_info.json.results | json_query(jmesquery) }}"
