@@ -6,7 +6,7 @@
 
    vars:
       specific_date: "{{ specific_date_str | from_datetime('%Y-%m-%dT%H:%M:%S.%fZ') }}"
-      current_date: "{{ ansible_date_time.to_datetime }}"
+      current_date: "{{ ansible_date_time | to_datetime }}"
       days_since: "{{ ((current_date.epoch | float - specific_date.epoch | float) / 86400) | int }}"
 
    tasks:
