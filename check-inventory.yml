@@ -3,7 +3,6 @@
  - name: Check host age with VMware inventory source
    become: false
    hosts: localhost
-   gather_facts: false
 
    vars:
       stage_inventory:
