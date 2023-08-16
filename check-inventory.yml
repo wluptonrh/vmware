@@ -24,8 +24,14 @@
        set_fact:
           jsondata: "{{ stage_inventory_info.json.results }}"
 
-     - debug:
-          msg: "{{ jsondata }}"
+     - name: Iterate through hosts and display information
+       debug:
+         msg: |
+            Host ID: {{ item.id }}
+            Host Name: {{ item.name }}
+            Created Date: {{ item.created }}
+            ---------------------------------------
+       loop: "{{ jsondata['msg'] }}"
 
      - name: Print each host and the date they were added to the inventory
        debug:
