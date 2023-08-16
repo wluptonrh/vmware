@@ -31,7 +31,7 @@
             Host Name: {{ item.name }}
             Created Date: {{ item.created }}
             ---------------------------------------
-       loop: "{{ jsondata['msg'] }}"
+       loop: "{{ jsondata }}"
 
      - name: Print each host and the date they were added to the inventory
        debug:
