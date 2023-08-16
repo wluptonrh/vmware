@@ -32,6 +32,10 @@
        debug:
          msg: |
             Host ID: {{ item.id }}
+            Name: {{ item.name }} 
+            Created: {{ item.created }}
+            Age: {{ (ansible_date_time.epoch | float - item.created | regex_replace('\\..*', '') | float) | int }}
+            ------------------------------------------
        loop: "{{ stage_inventory_info.json.results }}"
 
      - name: Print each host and the date they were added to the inventory
