@@ -24,13 +24,8 @@
        set_fact:
           jsondata: "{{ stage_inventory_info.json.results }}"
 
-     - name: save facts to variable
-       setup:
-       register: facts
-
-     - name: print facts
-       debug:
-          msg: "{{ facts }}"
+     - debug:
+          msg: "{{ jsondata }}"
 
      - name: Print each host and the date they were added to the inventory
        debug:
