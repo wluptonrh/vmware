@@ -25,7 +25,8 @@
           msg: "{{ stage_inventory_info.json.results[0].created | to_datetime('%Y-%m-%dT%H:%M:%S.%fZ') }}"
 
      - set_fact:
-           specific_date: stage_inventory_info.json.results[0].created | from_datetime('%Y-%m-%dT%H:%M:%S.%fZ')
+           specific_date: stage_inventory_info.json.results[0].created | to_datetime('%Y-%m-%dT%H:%M:%S.%fZ')
+           
      - debug:
           msg: "{{ ((current_date.epoch | float - specific_date.epoch | float) / 86400) | int }}"
 
