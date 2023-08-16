@@ -22,7 +22,7 @@
        register: stage_inventory_info
 
      - debug:
-          msg: "{{ stage_inventory_info }}"
+          msg: "{{ stage_inventory_info.json }}"
 
      - name: Save json data
        set_fact:
