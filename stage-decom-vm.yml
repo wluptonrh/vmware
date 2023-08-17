@@ -21,7 +21,7 @@
        tag_names:
          #- "{{ category_name }}:{{ tag_name }}"
          - stage-date:{{ ansible_date_time.date }}
-       object_name: 
+       object_name: rhel86-tpl
        object_type: VirtualMachine
        state: add
      delegate_to: localhost
