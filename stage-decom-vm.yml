@@ -1,6 +1,10 @@
+
 ---
- - hosts: localhost
- 
+ - name: Check host age with VMware inventory source
+   become: false
+   hosts: localhost
+   gather_facts: true
+
    tasks:
    - name: Gather hosts info using Community.VMware collection
      community.vmware.vmware_cluster_info:
