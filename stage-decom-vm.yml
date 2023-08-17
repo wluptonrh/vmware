@@ -2,14 +2,14 @@
  - hosts: localhost
  
    tasks:
-     - name: Gather hosts info using Community.VMware collection
-       community.vmware.vmware_cluster_info:
-         hostname: '{{ vcenter_hostname }}'
-         username: '{{ vcenter_username }}'
-         password: '{{ vcenter_password }}'
-         validate_certs: no
-         #cluster_name: 
-       register: cluster_info
+   - name: Gather hosts info using Community.VMware collection
+     community.vmware.vmware_cluster_info:
+       hostname: '{{ vcenter_hostname }}'
+       username: '{{ vcenter_username }}'
+       password: '{{ vcenter_password }}'
+       validate_certs: no
+       #cluster_name: 
+     register: cluster_info
       
      - name: Print hosts info
        debug:
