@@ -5,9 +5,9 @@
    hosts: localhost
 
    vars:
-      specific_date: "{{ specific_date_str | from_datetime('%Y-%m-%dT%H:%M:%S.%fZ') }}"
+      #specific_date: "{{ specific_date_str | from_datetime('%Y-%m-%dT%H:%M:%S.%fZ') }}"
       current_date: "{{ ansible_date_time }}"
-      days_since: "{{ ((current_date.epoch | float - specific_date.epoch | float) / 86400) | int }}"
+      #days_since: "{{ ((current_date.epoch | float - specific_date.epoch | float) / 86400) | int }}"
 
    tasks:
      - name: Gather host info from stage inventory
@@ -21,12 +21,12 @@
           body_format: json
        register: stage_inventory_info
 
+     - set_fact:
+          specific_date: stage_inventory_info.json.results[0].created | to_datetime('%Y-%m-%dT%H:%M:%S.%fZ')
 
      - debug:
           msg: "{{ stage_inventory_info.json.results[0].created | to_datetime('%Y-%m-%dT%H:%M:%S.%fZ') }}"
-
-     - set_fact:
-           specific_date: stage_inventory_info.json.results[0].created | to_datetime('%Y-%m-%dT%H:%M:%S.%fZ')
+          
            
      - debug:
           msg: "{{ (specific_date - ansible_date_time).days }}"
