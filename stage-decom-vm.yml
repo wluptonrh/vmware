@@ -11,6 +11,6 @@
        #cluster_name: 
      register: cluster_info
       
-     - name: Print hosts info
-       debug:
-         var: cluster_info
+   - name: Print hosts info
+     debug:
+       var: cluster_info
