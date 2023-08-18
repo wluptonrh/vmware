@@ -7,8 +7,12 @@
 
    vars:
        stage_vm: rhel86-tpl
+       decom_date:  ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  )
 
    tasks:
+   - debug:
+         var: "{{ decom_date }}"
+         
    - name: Gather hosts info using Community.VMware collection
      community.vmware.vmware_cluster_info:
        hostname: '{{ vcenter_hostname }}'
@@ -18,13 +22,21 @@
        cluster_name: Cluster-1
      register: cluster_info
 
-   - name: Create a new tag to define stage date and deletion date for staged vm
+   - name: Create a new tag to define stage date (current day) for staged vm
      community.vmware.vmware_tag:
        hostname: '{{ vcenter_hostname }}'
        username: '{{ vcenter_username }}'
        password: '{{ vcenter_password }}'
        category_name: stage-date
        tag_name: "{{ ansible_date_time.date }}"
+
+   - name: Create a new tag to define deletion date for staged vm
+     community.vmware.vmware_tag:
+       hostname: '{{ vcenter_hostname }}'
+       username: '{{ vcenter_username }}'
+       password: '{{ vcenter_password }}'
+       category_name: deletion-date
+       tag_name:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  ) }}"
      
 
    # Be sure to add tag categories for staging and deletion date within vsphere, those tags will be assigned to the vm here (stage-date, deletion-date)
