@@ -11,6 +11,34 @@
        #decom_date:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  )}}"
 
    tasks:
+   - name: Provide information about vCenter folders
+     community.vmware.vmware_folder_info:
+       hostname: '{{ vcenter_hostname }}'
+       username: '{{ vcenter_username }}'
+       password: '{{ vcenter_password }}'
+       datacenter: datacenter
+     delegate_to: localhost
+     register: vcenter_folder_info
+
+   - debug:
+       var: vcenter_folder_info
+
+   - name: Gather some info from a guest using the vSphere API output schema
+     community.vmware.vmware_guest_info:
+       hostname: "{{ vcenter_hostname }}"
+       username: "{{ vcenter_username }}"
+       password: "{{ vcenter_password }}"
+       datacenter: "{{ datacenter_name }}"
+       name: "{{ vm_name }}"
+       schema: "vsphere"
+       #properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+     delegate_to: localhost
+     register: vcenter_guest_info
+
+   - debug:
+       var: vcenter_guest_info
+      
+   
    - name: Set deletion date
      command: "date +'%d-%m-%Y' -d '+30 days'"
      register: deletion_date
