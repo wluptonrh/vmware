@@ -8,6 +8,7 @@
    vars:
        stage_vm: rhel86-tpl
        staging_folder: sandbox-kpr97
+       vshpere_datacenter: SDDC-Datacenter
        #decom_date:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  )}}"
 
    tasks:
@@ -16,7 +17,7 @@
        hostname: '{{ vcenter_hostname }}'
        username: '{{ vcenter_username }}'
        password: '{{ vcenter_password }}'
-       datacenter: datacenter
+       datacenter: "{{ vsphere_datacenter }}"
      delegate_to: localhost
      register: vcenter_folder_info
 
@@ -28,7 +29,7 @@
        hostname: "{{ vcenter_hostname }}"
        username: "{{ vcenter_username }}"
        password: "{{ vcenter_password }}"
-       datacenter: "{{ datacenter_name }}"
+       datacenter: "{{ vsphere_datacenter }}"
        name: "{{ stage_vm }}"
        schema: "vsphere"
        #properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
@@ -96,7 +97,7 @@
        hostname: "{{ vcenter_hostname }}"
        username: "{{ vcenter_username }}"
        password: "{{ vcenter_password }}"
-       datacenter: datacenter
+       datacenter: "{{ vsphere_datacenter }}"
        name: "{{ stage_vm }}"
        dest_folder: "{{ staging_folder }}" #"/{{ datacenter }}/vm"
      delegate_to: localhost
