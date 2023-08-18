@@ -5,6 +5,9 @@
    hosts: localhost
    gather_facts: true
 
+   vars:
+       stage_vm: rhel86-tpl
+
    tasks:
    - name: Gather hosts info using Community.VMware collection
      community.vmware.vmware_cluster_info:
@@ -33,7 +36,7 @@
        tag_names:
          #- "{{ category_name }}:{{ tag_name }}"
          - "stage-date:{{ ansible_date_time.date }}"
-       object_name: rhel86-tpl
+       object_name: "{{ stage_vm }}"
        object_type: VirtualMachine
        state: add
      delegate_to: localhost
