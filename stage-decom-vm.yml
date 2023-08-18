@@ -32,7 +32,7 @@
        password: "{{ vcenter_password }}"
        datacenter: "{{ vsphere_datacenter }}"
        name: "{{ stage_vm }}"
-       schema: "vsphere"
+       #schema: "vsphere"
        #properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
      delegate_to: localhost
      register: vcenter_guest_info
