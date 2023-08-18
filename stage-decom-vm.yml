@@ -12,10 +12,10 @@
    tasks:
    - name: Set deletion date
      command: "date +'%d-%m-%Y' -d '+30 days'"
-     register: decom_date
+     register: deletion_date
 
    - debug: 
-        var: decom_date
+        var: deletion_date.stdout
          
    - name: Gather hosts info using Community.VMware collection
      community.vmware.vmware_cluster_info:
@@ -40,7 +40,7 @@
        username: '{{ vcenter_username }}'
        password: '{{ vcenter_password }}'
        category_name: deletion-date
-       tag_name:  "{{ decom_date }}"
+       tag_name:  "{{ deletion_date.stdout }}"
      
 
    # Be sure to add tag categories for staging and deletion date within vsphere, those tags will be assigned to the vm here (stage-date, deletion-date)
@@ -52,8 +52,11 @@
        tag_names:
          #- "{{ category_name }}:{{ tag_name }}"
          - "stage-date:{{ ansible_date_time.date }}"
-         - "deletion-date:{{ decom_date.stdout }}"
+         - "deletion-date:{{ deletion_date.stdout }}"
        object_name: "{{ stage_vm }}"
        object_type: VirtualMachine
        state: add
      delegate_to: localhost
+
+   - name: Move to vm to staging folder
+     
