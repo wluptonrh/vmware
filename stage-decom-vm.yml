@@ -7,7 +7,7 @@
 
    vars:
        stage_vm: rhel86-tpl
-       staging_folder: sandbox-kpr97
+       staging_folder: /SDDC-Datacenter/vm/Workloads
        vsphere_datacenter: SDDC-Datacenter
        #decom_date:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  )}}"
 
