@@ -52,7 +52,7 @@
        tag_names:
          #- "{{ category_name }}:{{ tag_name }}"
          - "stage-date:{{ ansible_date_time.date }}"
-         - "deletion-date:{{ decom_date }}"
+         - "deletion-date:{{ decom_date.stdout }}"
        object_name: "{{ stage_vm }}"
        object_type: VirtualMachine
        state: add
