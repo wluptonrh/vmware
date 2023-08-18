@@ -40,7 +40,7 @@
        username: '{{ vcenter_username }}'
        password: '{{ vcenter_password }}'
        category_name: deletion-date
-       tag_name:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  ) }}"
+       tag_name:  "{{ decom_date }}"
      
 
    # Be sure to add tag categories for staging and deletion date within vsphere, those tags will be assigned to the vm here (stage-date, deletion-date)
@@ -52,6 +52,7 @@
        tag_names:
          #- "{{ category_name }}:{{ tag_name }}"
          - "stage-date:{{ ansible_date_time.date }}"
+         - "deletion-date:{{ decom_date }}"
        object_name: "{{ stage_vm }}"
        object_type: VirtualMachine
        state: add
