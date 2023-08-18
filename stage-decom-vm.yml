@@ -7,6 +7,7 @@
 
    vars:
        stage_vm: rhel86-tpl
+       staging_folder: sandbox-kpr97
        #decom_date:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  )}}"
 
    tasks:
@@ -18,13 +19,17 @@
         var: deletion_date.stdout
          
    - name: Gather hosts info using Community.VMware collection
-     community.vmware.vmware_cluster_info:
+     community.vmware.vmware_datacenter_info:
        hostname: '{{ vcenter_hostname }}'
        username: '{{ vcenter_username }}'
        password: '{{ vcenter_password }}'
        validate_certs: no
-       cluster_name: Cluster-1
-     register: cluster_info
+     register: datacenter_info
+
+   - debug:
+        var: "{{ datacenter_info }}"
+
+   
 
    - name: Create a new tag to define stage date (current day) for staged vm
      community.vmware.vmware_tag:
@@ -59,4 +64,12 @@
      delegate_to: localhost
 
    - name: Move to vm to staging folder
+     community.vmware.vmware_guest_move:
+       hostname: "{{ vcenter_hostname }}"
+       username: "{{ vcenter_username }}"
+       password: "{{ vcenter_password }}"
+       datacenter: datacenter
+       name: "{{ stage_vm }}"
+       dest_folder: "{{ staging_folder }}" #"/{{ datacenter }}/vm"
+     delegate_to: localhost
      
