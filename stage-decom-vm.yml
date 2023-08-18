@@ -15,6 +15,15 @@
        cluster_name: Cluster-1
      register: cluster_info
 
+   - name: Create a new tag to define stage date and deletion date for staged vm
+     community.vmware.vmware_tag:
+       hostname: '{{ vcenter_hostname }}'
+       username: '{{ vcenter_username }}'
+       password: '{{ vcenter_password }}'
+       category_name: stage-date
+       tag_name: "{{ ansible_date_time.date }}"
+     
+
    # Be sure to add tag categories for staging and deletion date within vsphere, those tags will be assigned to the vm here (stage-date, deletion-date)
    - name: Assign staging and deletion date tags to vm
      community.vmware.vmware_tag_manager:
