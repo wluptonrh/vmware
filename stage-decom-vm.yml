@@ -46,21 +46,10 @@
      command: "date +'%d-%m-%Y' -d '+30 days'"
      register: deletion_date
 
-   - debug: 
+   - name: Print decomissioning date 
+     debug: 
         var: deletion_date.stdout
          
-   - name: Gather hosts info using Community.VMware collection
-     community.vmware.vmware_datacenter_info:
-       hostname: '{{ vcenter_hostname }}'
-       username: '{{ vcenter_username }}'
-       password: '{{ vcenter_password }}'
-       validate_certs: no
-     register: datacenter_info
-
-   - debug:
-        var: "{{ datacenter_info }}"
-
-   
 
    - name: Create a new tag to define stage date (current day) for staged vm
      community.vmware.vmware_tag:
