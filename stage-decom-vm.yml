@@ -7,11 +7,15 @@
 
    vars:
        stage_vm: rhel86-tpl
-       decom_date:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  )}}"
+       #decom_date:  "{{ ansible_date_time.date | strftime( ( ansible_date_time.epoch | int ) + ( 86400 * 30 )  )}}"
 
    tasks:
-   - debug:
-         var: "{{ decom_date }}"
+   - name: Set deletion date
+     command: "date +'%d-%m-%Y' -d '+30 days'"
+     register: decom_date
+
+   - debug: 
+        var: decom_date
          
    - name: Gather hosts info using Community.VMware collection
      community.vmware.vmware_cluster_info:
