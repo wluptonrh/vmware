@@ -1,6 +1,6 @@
 
 ---
- - name: Check host age with VMware inventory source
+ - name: Stage a VM for decommissioning
    become: false
    hosts: localhost
    gather_facts: true
