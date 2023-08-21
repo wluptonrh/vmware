@@ -28,10 +28,14 @@
 
      - name: Display tags related to vm
        set_fact:
-         tag_info: "{{ item.name }}"
+         tag_info: "{{ item }}"
        loop: "{{ vm_info.virtual_machines[0].tags | json_query(query) }}"
        vars:
-         query: "[?category_name==`deletion-date`]" 
+         query: "[?category_name==`deletion-date`]"
+
+     - name: Print deletion date
+       debug:
+         msg: "{{ tag_info.name }}"
 
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
