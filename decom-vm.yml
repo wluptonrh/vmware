@@ -45,7 +45,7 @@
 
      - name: Check if deletion date has been reach on vm
        debug:
-         msg: "{{ ((decom_tag.name | to_datetime) - ( ansible_date_time.date | to_datetime )).days }}"
+         msg: "{{ ((decom_tag.name | to_datetime(%d-%m-%Y)) - ( ansible_date_time.date | to_datetime )).days }}"
 
     #  - name: Create decommissioning inventory group and staging hosts
     #    awx.awx.group:
