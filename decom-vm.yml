@@ -5,7 +5,7 @@
    gather_facts: true
 
    vars:
-     decom_vm: rhel86-tpl
+     decom_vm: 'rhel86-tpl'
      staging_folder: /SDDC-Datacenter/vm/Workloads
      
 
