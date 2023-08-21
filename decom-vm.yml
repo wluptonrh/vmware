@@ -5,9 +5,12 @@
    gather_facts: true
 
    vars:
-
+     decom_vm: rhel86-tpl
+     staging_folder: /SDDC-Datacenter/vm/Workloads
+     
 
    tasks: 
+
      - name: Get Tags from given VM Name
        block:
         - name: Get virtual machine info
@@ -15,7 +18,7 @@
             hostname: '{{ vcenter_hostname }}'
             username: '{{ vcenter_username }}'
             password: '{{ vcenter_password }}'
-            folder: "/datacenter/vm/folder"
+            folder: '{{ staging_folder }}'
           delegate_to: localhost
           register: vm_info
 
@@ -24,4 +27,6 @@
           with_items:
             - "{{ vm_info.virtual_machines | community.general.json_query(query) }}"
           vars:
-            query: "[?guest_name=='DC0_H0_VM0']"
+            query: "[?guest_name=={{ decom_vm }}]"
+
+
