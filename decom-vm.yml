@@ -16,6 +16,7 @@
          username: '{{ vcenter_username }}'
          password: '{{ vcenter_password }}'
          show_tag: true
+         vm_name: '{{ decom_vm }}'
        delegate_to: localhost
        register: vminfo
 
