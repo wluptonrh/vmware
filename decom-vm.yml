@@ -10,25 +10,6 @@
      
 
    tasks: 
-     - name: Gather all registered virtual machines
-       community.vmware.vmware_vm_info:
-         hostname: '{{ vcenter_hostname }}'
-         username: '{{ vcenter_username }}'
-         password: '{{ vcenter_password }}'
-         show_tag: true
-         vm_name: '{{ decom_vm }}'
-       delegate_to: localhost
-       register: vminfo
-
-     - name: Display all vms
-       debug:
-         msg: "{{ vminfo }}"
-
-     - name: Set stage and delete dates as facts
-       set_fact:
-         stage_date: "{{ vminfo }}
-
-         
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
          hostname: '{{ vcenter_hostname }}'
@@ -43,6 +24,9 @@
      - name: Display tags related to vm
        debug:
          msg: "{{ vm_info }}"
+
+
+     
 
  
 
