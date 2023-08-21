@@ -28,7 +28,7 @@
 
      - name: Display tags related to vm
        debug:
-         msg: "{{ items }}"
+         msg: "{{ item }}"
        loop: "{{ vm_info.virtual_machines[0].tags | json_query(query) }}"
        vars:
          query: "[?category_name==`deletion-date`]" 
