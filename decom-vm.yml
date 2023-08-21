@@ -36,7 +36,7 @@
 
     - name: Save json data as a fact
       set_fact:
-         all_vm_info: '{{ all_vms | from_json }}'
+         all_vm_info: '{{ all_vms }}'
 
     - name: Print all servers and their tags
       debug: 
