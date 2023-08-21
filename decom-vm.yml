@@ -1,7 +1,7 @@
 ---
  - name: Decommission VM on vCenter
    become: false
-   hosts: localhost
+   hosts: all
    gather_facts: true
 
    vars:
@@ -25,27 +25,37 @@
        debug:
          msg: "{{ vm_info }}"
 
-
-     - name: Display tags related to vm
+     - name: Store stage date tag as fact
        set_fact:
-         tag_info: "{{ item }}"
+         stage_tag: "{{ item }}"
+       loop: "{{ vm_info.virtual_machines[0].tags | json_query(query) }}"
+       vars:
+         query: "[?category_name==`stage-date`]"
+
+     - name: Store deletion date tag as fact
+       set_fact:
+         decom_tag: "{{ item }}"
        loop: "{{ vm_info.virtual_machines[0].tags | json_query(query) }}"
        vars:
          query: "[?category_name==`deletion-date`]"
 
      - name: Print deletion date
        debug:
-         msg: "{{ tag_info.name }}"
+         msg: "{{ decom_tag.name }}"
 
-     - name: Create decommissioning inventory group
-       awx.awx.group:
-         name: decommissioning
-         controller_host: "{{ controller_hostname }}"
-         controller_username: "{{ controller_username }}"
-         controller_password: "{{ controller_password }}"
-         inventory: "Workshop Inventory"
+     - name: Check if deletion date has been reach on vm
+       debug:
+         msg: "{{ ((decom_tag.name | to_datetime) - ( ansible_date_time.date | to_datetime )).days }}"
 
-    # - name: Add staging hosts to decommissioning group
+    #  - name: Create decommissioning inventory group and staging hosts
+    #    awx.awx.group:
+    #      name: decommissioning
+    #      controller_host: "{{ controller_hostname }}"
+    #      controller_username: "{{ controller_username }}"
+    #      controller_password: "{{ controller_password }}"
+    #      inventory: "Workshop Inventory"
+    #      hosts: all
+     
        
 
      - name: Gather info on vm to decommission
