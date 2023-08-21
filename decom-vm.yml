@@ -28,7 +28,7 @@
 
      - name: Display tags related to vm
        debug:
-         msg: "{{ vm_info.tags }}"
+         msg: "{{ vm_info.virtual_machines.tags }}"
 
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
