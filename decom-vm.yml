@@ -23,7 +23,24 @@
 
      - name: Display tags related to vm
        debug:
-         msg: "{{ vm_info }}"
+         msg: "{{ vm_info.tags }}"
+
+     - name: Gather info on vm to decommission
+       community.vmware.vmware_vm_info:
+         hostname: '{{ vcenter_hostname }}'
+         username: '{{ vcenter_username }}'
+         password: '{{ vcenter_password }}'
+         show_tag: true
+       delegate_to: localhost
+       register: all_vms
+
+    - name: Save json data as a fact
+      set_fact:
+         all_vm_info: '{{ all_vms | from_json }}'
+
+    - name: Print all servers and their tags
+      debug: 
+         msg: "{{ all_vm_info }}" 
 
 
      
