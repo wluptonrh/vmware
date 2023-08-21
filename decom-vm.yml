@@ -37,6 +37,14 @@
        debug:
          msg: "{{ tag_info.name }}"
 
+     - name: Create decommissioning inventory group
+       group:
+         name: decommissioning
+         inventory: "Workshop Inventory"
+
+    # - name: Add staging hosts to decommissioning group
+       
+
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
          hostname: '{{ vcenter_hostname }}'
