@@ -23,7 +23,7 @@
 
      - name: Display tags related to vm
        debug:
-         var: "{{ vm_info }}"
+         msg: "{{ vm_info }}"
 
 
      
