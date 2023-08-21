@@ -11,22 +11,21 @@
 
    tasks: 
 
-     - name: Get Tags from given VM Name
-       block:
-        - name: Get virtual machine info
-          community.vmware.vmware_vm_info:
-            hostname: '{{ vcenter_hostname }}'
-            username: '{{ vcenter_username }}'
-            password: '{{ vcenter_password }}'
-            folder: '{{ staging_folder }}'
-          delegate_to: localhost
-          register: vm_info
+     - name: Gather info on vm to decommission
+       community.vmware.vmware_vm_info:
+         hostname: '{{ vcenter_hostname }}'
+         username: '{{ vcenter_username }}'
+         password: '{{ vcenter_password }}'
+         folder: '{{ staging_folder }}'
+         vm_name: '{{ decom_vm }}'
+         show_tag: true
+       delegate_to: localhost
+       register: vm_info
 
-        - debug:
-            msg: "{{ item.tags }}"
-          with_items:
-            - "{{ vm_info.virtual_machines | community.general.json_query(query) }}"
-          vars:
-            query: "[?guest_name=={{ decom_vm }}]"
+     - name: Display tags related to vm
+       debug:
+         msg: '{{ vm_info }}'
+
+ 
 
 
