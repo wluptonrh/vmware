@@ -1,1 +1,11 @@
+---
+ - name: Decommission VM on vCenter
+   become: false
+   hosts: localhost
+   gather_facts: true
 
+   vars:
+
+
+   tasks: 
+     - name: 
