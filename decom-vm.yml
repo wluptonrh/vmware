@@ -20,7 +20,7 @@
        register: vminfo
 
      - name: Display all vms
-         msg: '{{ vminfo }}'
+         msg: "{{ vminfo }}"
        
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
@@ -35,7 +35,7 @@
 
      - name: Display tags related to vm
        debug:
-         msg: '{{ vm_info }}'
+         msg: "{{ vm_info }}"
 
  
 
