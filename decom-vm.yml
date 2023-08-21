@@ -20,6 +20,7 @@
        register: vminfo
 
      - name: Display all vms
+       debug:
          msg: "{{ vminfo }}"
        
      - name: Gather info on vm to decommission
