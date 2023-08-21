@@ -5,8 +5,8 @@
    gather_facts: true
 
    vars:
-     decom_vm: 'rhel86-tpl'
-     staging_folder: /SDDC-Datacenter/vm/Workloads
+     #decom_vm: 'rhel86-tpl'
+     #staging_folder: /SDDC-Datacenter/vm/Workloads
      
 
    tasks: 
@@ -22,6 +22,14 @@
      - name: Display all vms
        debug:
          msg: "{{ vminfo }}"
+
+     - name: Set stage and delete dates as facts
+       set_fact:
+         stage_date: "{{ vminfo
+         
+
+     - name: Print age
+       debug
        
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
