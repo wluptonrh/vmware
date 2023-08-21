@@ -26,12 +26,9 @@
 
      - name: Set stage and delete dates as facts
        set_fact:
-         stage_date: "{{ vminfo
-         
+         stage_date: "{{ vminfo }}
 
-     - name: Print age
-       debug
-       
+         
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
          hostname: '{{ vcenter_hostname }}'
