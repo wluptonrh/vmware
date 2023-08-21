@@ -23,6 +23,11 @@
 
      - name: Display tags related to vm
        debug:
+         msg: "{{ vm_info }}"
+
+
+     - name: Display tags related to vm
+       debug:
          msg: "{{ vm_info.tags }}"
 
      - name: Gather info on vm to decommission
