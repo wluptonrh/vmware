@@ -31,7 +31,7 @@
          msg: "{{ items }}"
        loop: "{{ vm_info.virtual_machines[0].tags | json_query(query) }}"
        vars:
-         query: "[?name==`deletion-date`]" 
+         query: "[?category_name==`deletion-date`]" 
 
      - name: Gather info on vm to decommission
        community.vmware.vmware_vm_info:
