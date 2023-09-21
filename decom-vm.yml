@@ -4,9 +4,9 @@
    hosts: localhost
    gather_facts: true
 
-   vars:
-     #decom_vm: 'rhel86-tpl'
-     #staging_folder: /SDDC-Datacenter/vm/Workloads
+   # vars:
+   #   decom_vm: 
+   #   staging_folder: 
      
 
    tasks: 
@@ -47,36 +47,7 @@
        debug:
          msg: "{{ ((decom_tag.name | to_datetime(%d-%m-%Y)) - ( ansible_date_time.date | to_datetime )).days }}"
 
-    #  - name: Create decommissioning inventory group and staging hosts
-    #    awx.awx.group:
-    #      name: decommissioning
-    #      controller_host: "{{ controller_hostname }}"
-    #      controller_username: "{{ controller_username }}"
-    #      controller_password: "{{ controller_password }}"
-    #      inventory: "Workshop Inventory"
-    #      hosts: all
-     
-       
 
-     - name: Gather info on vm to decommission
-       community.vmware.vmware_vm_info:
-         hostname: '{{ vcenter_hostname }}'
-         username: '{{ vcenter_username }}'
-         password: '{{ vcenter_password }}'
-         show_tag: true
-       delegate_to: localhost
-       register: all_vms
-       
-     - name: Save json data as a fact
-       set_fact:
-         all_vm_info: "{{ all_vms }}" 
-
-     - name: Print all servers and their tags
-       debug: 
-         msg: "{{ all_vm_info }}" 
-
-
-     
 
  
 
